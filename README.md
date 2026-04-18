@@ -1,38 +1,140 @@
-# DIO - Trilha .NET - Fundamentos
-www.dio.me
+# Sistema de Gerenciamento de Estacionamento
 
-## Desafio de projeto
-Para este desafio, você precisará usar seus conhecimentos adquiridos no módulo de fundamentos, da trilha .NET da DIO.
+Sistema desenvolvido como desafio da Trilha .NET Fundamentos da [Digital Innovation One](https://www.dio.me/).
 
-## Contexto
-Você foi contratado para construir um sistema para um estacionamento, que será usado para gerenciar os veículos estacionados e realizar suas operações, como por exemplo adicionar um veículo, remover um veículo (e exibir o valor cobrado durante o período) e listar os veículos.
+## 📋 Descrição do Projeto
 
-## Proposta
-Você precisará construir uma classe chamada "Estacionamento", conforme o diagrama abaixo:
-![Diagrama de classe estacionamento](diagrama_classe_estacionamento.png)
+Sistema console interativo para gerenciamento de um estacionamento, permitindo cadastrar, remover e listar veículos. O programa calcula automaticamente a tarifa de estacionamento baseada no tempo de permanência do veículo.
 
-A classe contém três variáveis, sendo:
+## 🏗️ Estrutura do Projeto
 
-**precoInicial**: Tipo decimal. É o preço cobrado para deixar seu veículo estacionado.
+```
+Desafio-fundamentos-CShap/
+│
+├── README.md                          # Documentação do projeto
+├── trilha-net-fundamentos-desafio.sln # Arquivo solução do Visual Studio
+│
+└── DesafioFundamentos/               # Pasta principal do projeto
+    ├── DesafioFundamentos.csproj     # Arquivo de configuração do projeto
+    ├── Program.cs                    # Arquivo principal (ponto de entrada)
+    │
+    ├── Models/                       # Pasta contendo as classes de modelo
+    │   └── Estacionamento.cs         # Classe que implementa a lógica do estacionamento
+    │
+    ├── bin/                          # Pasta de saída compilada
+    └── obj/                          # Pasta de arquivos de objeto compilados
+```
 
-**precoPorHora**: Tipo decimal. É o preço por hora que o veículo permanecer estacionado.
+## 🎯 Funcionalidades Implementadas
 
-**veiculos**: É uma lista de string, representando uma coleção de veículos estacionados. Contém apenas a placa do veículo.
+### 1. **Adicionar Veículo**
+Permite cadastrar um novo veículo no estacionamento através da sua placa.
+- Usuário digita a placa do veículo
+- Veículo é armazenado em uma lista interna
 
-A classe contém três métodos, sendo:
+### 2. **Remover Veículo**
+Remove um veículo do estacionamento e calcula a tarifa total.
+- Solicita a placa do veículo
+- Verifica se o veículo está estacionado (busca case-insensitive)
+- Solicita o tempo (em horas) que o veículo permaneceu estacionado
+- Calcula e exibe o valor total: `preço inicial + (preço por hora × horas)`
+- Remove o veículo da lista
 
-**AdicionarVeiculo**: Método responsável por receber uma placa digitada pelo usuário e guardar na variável **veiculos**.
+### 3. **Listar Veículos**
+Exibe todos os veículos atualmente estacionados.
+- Se houver veículos: lista a placa de cada um
+- Se não houver: exibe mensagem "Não há veículos estacionados"
 
-**RemoverVeiculo**: Método responsável por verificar se um determinado veículo está estacionado, e caso positivo, irá pedir a quantidade de horas que ele permaneceu no estacionamento. Após isso, realiza o seguinte cálculo: **precoInicial** * **precoPorHora**, exibindo para o usuário.
-
-**ListarVeiculos**: Lista todos os veículos presentes atualmente no estacionamento. Caso não haja nenhum, exibir a mensagem "Não há veículos estacionados".
-
-Por último, deverá ser feito um menu interativo com as seguintes ações implementadas:
+### 4. **Menu Interativo**
+Interface em loop que permite:
 1. Cadastrar veículo
 2. Remover veículo
 3. Listar veículos
-4. Encerrar
+4. Encerrar programa
 
+## 💻 Classe Principal: Estacionamento
 
-## Solução
-O código está pela metade, e você deverá dar continuidade obedecendo as regras descritas acima, para que no final, tenhamos um programa funcional. Procure pela palavra comentada "TODO" no código, em seguida, implemente conforme as regras acima.
+### Variáveis de Instância
+
+| Variável | Tipo | Descrição |
+|----------|------|-----------|
+| `precoInicial` | `decimal` | Preço fixo cobrado para qualquer veículo estacionado |
+| `precoPorHora` | `decimal` | Preço adicional cobrado por cada hora de permanência |
+| `veiculos` | `List<string>` | Lista das placas dos veículos estacionados |
+
+### Métodos
+
+#### `Estacionamento(decimal precoInicial, decimal precoPorHora)`
+**Construtor** - Inicializa o estacionamento com os preços definidos pelo usuário.
+
+#### `AdicionarVeiculo()`
+Adiciona um novo veículo ao estacionamento.
+
+#### `RemoverVeiculo()`
+Remove um veículo e calcula a tarifa cobrada.
+
+#### `ListarVeiculos()`
+Exibe todos os veículos atualmente estacionados.
+
+## 🚀 Como Usar
+
+1. **Clone ou execute o projeto:**
+   ```bash
+   dotnet run
+   ```
+
+2. **Na inicialização:**
+   - Digite o preço inicial para estacionar
+   - Digite o preço por hora de permanência
+
+3. **No menu:**
+   - Selecione a opção desejada (1-4)
+   - Siga as instruções na tela
+   - Pressione uma tecla para continuar
+
+### Exemplo de Uso
+
+```
+Seja bem vindo ao sistema de estacionamento!
+Digite o preço inicial:
+10.00
+
+Agora digite o preço por hora:
+5.00
+
+[Menu interativo]
+Digite a sua opção:
+1 - Cadastrar veículo
+2 - Remover veículo
+3 - Listar veículos
+4 - Encerrar
+```
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Linguagem:** C# (.NET 6.0)
+- **Tipo de Projeto:** Console Application
+- **Paradigma:** Programação Orientada a Objetos (POO)
+
+## 📌 Conceitos Aplicados
+
+- ✅ Classes e Instanciação de Objetos
+- ✅ Variáveis Privadas e Públicas
+- ✅ Construtores
+- ✅ Métodos
+- ✅ Coleções (List<T>)
+- ✅ LINQ (método `Any()` e `Remove()`)
+- ✅ Entrada e Saída de Dados (Console)
+- ✅ Estruturas de Controle (if/else, while, switch)
+- ✅ Conversão de Tipos
+- ✅ Tratamento de Strings (ToUpper())
+
+## 👤 Autor
+
+Desenvolvido como parte do desafio da Trilha .NET Fundamentos da DIO.
+
+## 📚 Referências
+
+- [DIO - Digital Innovation One](https://www.dio.me/)
+- [Documentação .NET](https://docs.microsoft.com/dotnet/)
+- [Documentação C#](https://docs.microsoft.com/pt-br/dotnet/csharp/)
